@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDIGO CRAFT | Premium Denim & Apparel</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS Variables for Denim Theme */
+        :root {
+            --indigo-dark: #0f1c2e;
+            --denim-blue: #1f3a5f;
+            --stone-wash: #3d5a80;
+            --light-wash: #e0fbfc;
+            --rivet-copper: #d97706;
+            --text-dark: #1e293b;
+            --text-light: #f8fafc;
+            --bg-gray: #f1f5f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            background-color: #ffffff;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Navbar */
+        header {
+            background-color: var(--indigo-dark);
+            color: var(--text-light);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--rivet-copper);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--rivet-copper);
+        }
+
+        .cart-btn {
+            background-color: var(--rivet-copper);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .cart-btn:hover {
+            background-color: #b45309;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 85vh;
+            background: linear-gradient(rgba(15, 28, 46, 0.7), rgba(15, 28, 46, 0.7)), 
+                        url('https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-light);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            color: #cbd5e1;
+        }
+
+        .btn-primary {
+            background-color: var(--rivet-copper);
+            color: white;
+            padding: 0.9rem 2.2rem;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: transform 0.3s, background 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: #b45309;
+            transform: translateY(-2px);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--indigo-dark);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 3rem;
+        }
+
+        /* Filter Buttons */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--denim-blue);
+            background: transparent;
+            color: var(--denim-blue);
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--denim-blue);
+            color: white;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--rivet-copper);
+            font-weight: 700;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin: 0.4rem 0;
+            color: var(--indigo-dark);
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--denim-blue);
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.7rem;
+            background-color: var(--indigo-dark);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--stone-wash);
+        }
+
+        /* Craftsmanship / About Section */
+        .about-section {
+            background-color: var(--bg-gray);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .about-content h2 {
+            font-size: 2rem;
+            color: var(--indigo-dark);
+            margin-bottom: 1rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            color: #475569;
+        }
+
+        .features-list {
+            list-style: none;
+        }
+
+        .features-list li {
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: var(--denim-blue);
+        }
+
+        .features-list i {
+            color: var(--rivet-copper);
+            margin-right: 10px;
+        }
+
+        /* Contact / Newsletter */
+        .newsletter {
+            background-color: var(--denim-blue);
+            color: white;
+            text-align: center;
+            padding: 4rem 5%;
+        }
+
+        .newsletter h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .newsletter p {
+            margin-bottom: 1.5rem;
+            color: #cbd5e1;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--rivet-copper);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--indigo-dark);
+            color: #94a3b8;
+            text-align: center;
+            padding: 2rem 5%;
+            font-size: 0.9rem;
+        }
+
+        /* Cart Notification Toast */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: var(--rivet-copper);
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 16px;
+            position: fixed;
+            z-index: 2000;
+            right: 30px;
+            bottom: 30px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.3rem; }
+            nav ul { display: none; }
+            .newsletter-form { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header>
+        <a href="#" class="logo">INDIGO<span>CRAFT</span></a>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#collection">Collection</a></li>
+                <li><a href="#craft">Our Craft</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button class="cart-btn" onclick="alert('Total Items in Cart: ' + cartCount)">
+            <i class="fas fa-shopping-bag"></i>
+            <span>Cart (<span id="cart-count">0</span>)</span>
+        </button>
+    </header>
+
+    <!-- Hero Banner -->
+    <section id="home" class="hero">
+        <h1>Raw Selvedge & Authentic Denim</h1>
+        <p>Crafted with 14oz Japanese & Pakistani organic cotton. Built to fade with your journey and last a lifetime.</p>
+        <a href="#collection" class="btn-primary">Explore Collection</a>
+    </section>
+
+    <!-- Products Collection -->
+    <section id="collection">
+        <h2 class="section-title">Featured Denim</h2>
+        <p class="section-subtitle">Hand-finished jeans, jackets, and shirts engineered for durability</p>
+
+        <!-- Filter Buttons -->
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterProducts('all', this)">All Products</button>
+            <button class="filter-btn" onclick="filterProducts('jeans', this)">Jeans</button>
+            <button class="filter-btn" onclick="filterProducts('jackets', this)">Jackets</button>
+            <button class="filter-btn" onclick="filterProducts('shirts', this)">Shirts</button>
+        </div>
+
+        <!-- Product Cards Grid -->
+        <div class="products-grid" id="products-container">
+            <!-- Product 1 -->
+            <div class="product-card" data-category="jeans">
+                <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80" alt="Slim Fit Raw Indigo Jeans" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Jeans</span>
+                    <h3 class="product-title">14oz Raw Selvedge Slim</h3>
+                    <p class="product-price">Rs. 4,500</p>
+                    <button class="add-to-cart" onclick="addToCart('14oz Raw Selvedge Slim')">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card" data-category="jackets">
+                <img src="https://images.unsplash.com/photo-1576871337622-98d48d1cf531?auto=format&fit=crop&w=600&q=80" alt="Classic Trucker Denim Jacket" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Jackets</span>
+                    <h3 class="product-title">Vintage Stonewash Trucker</h3>
+                    <p class="product-price">Rs. 5,800</p>
+                    <button class="add-to-cart" onclick="addToCart('Vintage Stonewash Trucker')">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card" data-category="jeans">
+                <img src="https://images.unsplash.com/photo-1604176354204-9268737828e4?auto=format&fit=crop&w=600&q=80" alt="Relaxed Tapered Vintage Jeans" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Jeans</span>
+                    <h3 class="product-title">90s Relaxed Tapered Wash</h3>
+                    <p class="product-price">Rs. 4,200</p>
+                    <button class="add-to-cart" onclick="addToCart('90s Relaxed Tapered Wash')">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card" data-category="shirts">
+                <img src="https://images.unsplash.com/photo-1589310243389-96a5483213a8?auto=format&fit=crop&w=600&q=80" alt="Western Chambray Denim Shirt" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Shirts</span>
+                    <h3 class="product-title">Western Chambray Workshirt</h3>
+                    <p class="product-price">Rs. 3,400</p>
+                    <button class="add-to-cart" onclick="addToCart('Western Chambray Workshirt')">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Craftsmanship -->
+    <section id="craft" class="about-section">
+        <div class="about-img">
+            <img src="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?auto=format&fit=crop&w=800&q=80" alt="Denim Fabric Weaving">
+        </div>
+        <div class="about-content">
+            <h2>The Art of True Denim</h2>
+            <p>Every pair of IndigoCraft jeans is woven on vintage shuttle looms, ensuring dense durability and unique character. We use eco-friendly ozone washing techniques to save up to 80% water during production.</p>
+            <ul class="features-list">
+                <li><i class="fas fa-check-circle"></i> 100% Heavyweight Ring-Spun Cotton</li>
+                <li><i class="fas fa-check-circle"></i> Solid Copper Rivets & Reinforced Stitching</li>
+                <li><i class="fas fa-check-circle"></i> Sustainable Eco-Wash Technology</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Newsletter / Contact -->
+    <section id="contact" class="newsletter">
+        <h2>Join the Denim Club</h2>
+        <p>Subscribe to get 15% off your first order and early access to limited selvedge drops.</p>
+        <form class="newsletter-form" onsubmit="subscribeUser(event)">
+            <input type="email" id="email-input" placeholder="Enter your email address..." required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 INDIGOCRAFT DENIM CO. All Rights Reserved. | Designed for Denim Enthusiasts.</p>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast">Item added to cart!</div>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        let cartCount = 0;
+
+        // Add to Cart Functionality
+        function addToCart(productName) {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+            
+            const toast = document.getElementById('toast');
+            toast.innerText = `"${productName}" added to cart!`;
+            toast.className = "show";
+            setTimeout(() => { 
+                toast.className = toast.className.replace("show", ""); 
+            }, 3000);
+        }
+
+        // Category Filter Functionality
+        function filterProducts(category, btnElement) {
+            // Update active button styling
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            // Filter product cards
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Newsletter Form Submission
+        function subscribeUser(event) {
+            event.preventDefault();
+            const email = document.getElementById('email-input').value;
+            alert(`Thank you for subscribing with ${email}! Use code DENIM15 at checkout.`);
+            document.getElementById('email-input').value = '';
+        }
+    </script>
+</body>
+</html>
